@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <link rel = "stylesheet" href = "style.css">
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="bg-blue-800 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="brgy.png" alt="Barangay logo featuring a shield with sun and leaf motif" class="h-10 w-10 rounded-full">
+                    <span class="text-xl font-bold">Barangay Management System</span>
+                </div>
+                <div id="navLinks" class="hidden md:flex space-x-6">
+                    <a href="#" class="nav-link" onclick="showSection('home')">Home</a>
+                    <a href="#" class="nav-link" onclick="showSection('about')">About</a>
+                    <a href="#" class="nav-link hidden" id="dashboardNav" onclick="showSection('dashboard')">Dashboard</a>
+                    <a href="#" class="nav-link hidden" id="adminNav" onclick="showSection('admin')">Admin</a>
+                    <a href="#" class="nav-link" id="logoutNav" onclick="logout()">Logout</a>
+                </div>
+                <button id="mobileMenuButton" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-blue-700 px-4 py-2">
+                <div class="flex flex-col space-y-3">
+                    <a href="#" class="nav-link block" onclick="showSection('home')">Home</a>
+                    <a href="#" class="nav-link block" onclick="showSection('about')">About</a>
+                    <a href="#" class="nav-link block hidden" id="mobileDashboardNav" onclick="showSection('dashboard')">Dashboard</a>
+                    <a href="#" class="nav-link block hidden" id="mobileAdminNav" onclick="showSection('admin')">Admin</a>
+                    <a href="#" class="nav-link block" id="mobileLogoutNav" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- Home Section -->
+            <section id="homeSection" class="text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl font-bold text-blue-800 mb-6">Welcome to Barangay Management System</h1>
+                    <p class="text-xl text-gray-700 mb-8">A comprehensive platform for barangay officials and residents to manage community affairs efficiently.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <a href="dashboard-resident.html" class="dashboard-card bg-white p-6 rounded-lg shadow-md transition hover:bg-blue-50 cursor-pointer block">
+                            <img src="https://placehold.co/100x100" alt="Resident registration icon showing a person with a form" class="mx-auto h-16 w-16 mb-4">
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Resident Portal</h3>
+                            <p class="text-gray-600">Register as a resident and access barangay services online.</p>
+                        </a>
+                        <a href="#" onclick="openDashboard('official')" class="dashboard-card bg-white p-6 rounded-lg shadow-md transition hover:bg-blue-50 cursor-pointer block">
+                            <img src="https://placehold.co/100x100" alt="Official dashboard icon showing a clipboard and chart" class="mx-auto h-16 w-16 mb-4">
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Official Dashboard</h3>
+                            <p class="text-gray-600">For barangay officials to manage community records and services.</p>
+                        </a>
+                        <a href="#" onclick="openDashboard('admin')" class="dashboard-card bg-white p-6 rounded-lg shadow-md transition hover:bg-blue-50 cursor-pointer block">
+                            <img src="https://placehold.co/100x100" alt="Admin tools icon showing gears and settings" class="mx-auto h-16 w-16 mb-4">
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Admin Tools</h3>
+                            <p class="text-gray-600">Administrative functions for barangay administrators.</p>
+                        </a>
+                    </div>
+                    
+                    <button onclick="showSection('login')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                        Get Started
+                    </button>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="aboutSection" class="hidden max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">About Our Barangay System</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3">Our Mission</h3>
+                        <p class="text-gray-700 mb-6">To provide an efficient digital platform that connects barangay officials and residents, streamlining community services and improving governance transparency.</p>
+                        
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3">Key Features</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li>Secure user accounts for all barangay stakeholders</li>
+                            <li>Role-based access control (Residents, KAGAWAD, Chairman, Admin)</li>
+                            <li>Document request and tracking system</li>
+                            <li>Community announcements and notifications</li>
+                            <li>Complaint and suggestion management</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/500x300" alt="Community meeting in a barangay hall with officials and residents discussing" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+                </div>
+            </section>
+
+           
+
+
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold">Barangay Management System</h3>
+                        <p class="text-gray-400">Serving the community with digital solutions</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center text-gray-400 text-sm">
+                    &copy; 2025 Barangay Management System. All rights reserved By Clarivet Olei.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    
+   <script src="script.js"></script>
+   <script>
+   function logout() {
+       window.location.href = 'login.html';
+   }
+
+   // Password eye toggle for all forms
+   function togglePasswordVisibility(inputId) {
+       const input = document.getElementById(inputId);
+       if (input.type === "password") {
+           input.type = "text";
+       } else {
+           input.type = "password";
+       }
+   }
+
+   // Restrict dashboard access by role
+   function openDashboard(type) {
+       const currentUser = localStorage.getItem('currentUser');
+       if (!currentUser) {
+           alert('Please login first.');
+           window.location.href = 'login.html';
+           return;
+       }
+       const user = JSON.parse(currentUser);
+       // Accept both lowercase and uppercase role names
+       const allowedRoles = ['chairman', 'kagawad', 'admin'];
+       const userRole = user.role ? user.role.toLowerCase() : '';
+       if (type === 'official') {
+           if (allowedRoles.includes(userRole)) {
+               window.location.href = 'dashboard-official.html';
+           } else {
+               alert('CLASSIFIED: You are not allowed to access Official Dashboard.');
+           }
+       } else if (type === 'admin') {
+           if (allowedRoles.includes(userRole)) {
+               window.location.href = 'dashboard-admin.html';
+           } else {
+               alert('CLASSIFIED: You are not allowed to access Admin Tools.');
+           }
+       }
+   }
+
+   // Tab switching logic for login/register
+   document.addEventListener("DOMContentLoaded", function() {
+       const loginTab = document.getElementById("loginTab");
+       const registerTab = document.getElementById("registerTab");
+       const loginFormContainer = document.getElementById("loginFormContainer");
+       const registerFormContainer = document.getElementById("registerFormContainer");
+
+       if (loginTab && registerTab && loginFormContainer && registerFormContainer) {
+           loginTab.onclick = function() {
+               loginFormContainer.classList.remove("hidden");
+               registerFormContainer.classList.add("hidden");
+               loginTab.style.background = "#2563eb";
+               loginTab.style.color = "#fff";
+               registerTab.style.background = "#fff";
+               registerTab.style.color = "#2563eb";
+           };
+           registerTab.onclick = function() {
+               loginFormContainer.classList.add("hidden");
+               registerFormContainer.classList.remove("hidden");
+               registerTab.style.background = "#2563eb";
+               registerTab.style.color = "#fff";
+               loginTab.style.background = "#fff";
+               loginTab.style.color = "#2563eb";
+           };
+       }
+   });
+   </script>
+</body>
+</html>

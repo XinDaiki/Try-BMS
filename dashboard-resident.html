@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resident Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .sidebar-btn { transition: background 0.2s, color 0.2s; }
+    .sidebar-btn.active, .sidebar-btn:hover { background: #2563eb !important; color: #fff !important; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="bg-gray-900 text-white w-64 flex-shrink-0 flex flex-col">
+            <div class="flex items-center px-6 py-4 border-b border-gray-800">
+                <img src="brgy.png" alt="BRM SYSTEM" class="h-10 w-10 rounded-full mr-3">
+                <span class="font-bold text-lg">BRM SYSTEM</span>
+            </div>
+            <div class="px-6 py-4 border-b border-gray-800 flex items-center">
+                <img src="brgy.png" alt="Resident" class="h-10 w-10 rounded-full mr-3">
+                <div>
+                    <div class="font-semibold" id="sidebarUserName">Resident</div>
+                    <div class="text-xs text-gray-400" id="sidebarUserRole">Resident</div>
+                </div>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <ul class="space-y-2">
+                    <li><button onclick="showTab('dashboardMain')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">🏠</span> Dashboard</button></li>
+                    <li><button onclick="showTab('complaintsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">📢</span> Complaint</button></li>
+                    <li><button onclick="showTab('officialsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">🧑‍💼</span> BRGY Officials</button></li>
+                    <li><button onclick="showTab('documentsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">📄</span> Request Documents</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <div class="flex-1 bg-gray-100">
+            <!-- Top Bar -->
+            <header class="bg-blue-800 text-white flex justify-between items-center px-8 py-4">
+                <h1 class="text-2xl font-bold">Resident Dashboard</h1>
+                <div class="flex items-center">
+                    <span id="topBarUserName" class="font-semibold mr-3">Resident</span>
+                    <img src="brgy.png" alt="User" class="h-10 w-10 rounded-full">
+                </div>
+            </header>
+            <!-- Dashboard Main -->
+            <section id="dashboardMain" class="p-8">
+                <h2 class="text-xl font-bold text-blue-800 mb-4">Welcome, Resident!</h2>
+                <p class="mb-4">Use the sidebar to file complaints, view officials, or request documents.</p>
+            </section>
+            <!-- Complaints Section -->
+            <section id="complaintsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">File a Complaint or Suggestion</h3>
+                <form id="complaintForm" class="bg-white p-4 rounded shadow-md mb-4">
+                    <input type="text" id="complaintType" placeholder="Type (e.g. Complaint, Suggestion)" class="border px-2 py-1 rounded w-full mb-2" required>
+                    <input type="text" id="complaintSubject" placeholder="Subject" class="border px-2 py-1 rounded w-full mb-2" required>
+                    <textarea id="complaintDescription" placeholder="Description" class="border px-2 py-1 rounded w-full mb-2" required></textarea>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
+                    <div id="complaintError" class="text-red-600 mt-2"></div>
+                </form>
+                <div id="myComplaints">Your complaints will appear here.</div>
+            </section>
+            <!-- Officials Section -->
+            <section id="officialsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Barangay Officials</h3>
+                <div id="officialsTableBody">Officials will be loaded here.</div>
+            </section>
+            <!-- Documents Section -->
+            <section id="documentsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Request Documents</h3>
+                <form id="documentForm" class="bg-white p-4 rounded shadow-md mb-4">
+                    <input type="text" id="documentType" placeholder="Document Type (e.g. Barangay Clearance)" class="border px-2 py-1 rounded w-full mb-2" required>
+                    <input type="text" id="documentPurpose" placeholder="Purpose" class="border px-2 py-1 rounded w-full mb-2" required>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Request</button>
+                    <div id="documentError" class="text-red-600 mt-2"></div>
+                </form>
+                <div id="myDocuments">Your document requests will appear here.</div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="resident.js"></script>
+    
+    
+</body>
+</html>

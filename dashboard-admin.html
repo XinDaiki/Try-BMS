@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .sidebar-btn {
+        transition: background 0.2s, color 0.2s;
+    }
+    .sidebar-btn.active, .sidebar-btn:hover {
+        background: #6ba5fc !important;
+        color: #fff !important;
+        font-weight: 600;
+    }
+    </style>
+    <title>Resident Dashboard</title>
+</head>
+<body>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="bg-gray-900 text-white w-64 flex-shrink-0 flex flex-col">
+            <div class="flex items-center px-6 py-4 border-b border-gray-800">
+                <img src="brgy.png" alt="BRM SYSTEM" class="h-10 w-10 rounded-full mr-3">
+                <span class="font-bold text-lg">BRM SYSTEM</span>
+            </div>
+            <div class="px-6 py-4 border-b border-gray-800 flex items-center">
+                <img src="brgy.png" alt="Admin" class="h-10 w-10 rounded-full mr-3">
+                <div>
+                    <div class="font-semibold" id="sidebarUserName">Admin</div>
+                    <div class="text-xs text-gray-400" id="sidebarUserRole">Administrator</div>
+                </div>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <ul class="space-y-2">
+                    <li><button onclick="showTab('dashboardMain')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">🏠</span> Dashboard</button></li>
+                    <li><button onclick="showTab('residentsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">👥</span> Residents Record</button></li>
+                    <li><button onclick="showTab('officialsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">🧑‍💼</span> Brgy Officials</button></li>
+                    <li><button onclick="showTab('complaintsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">📢</span> Complaint</button></li>
+                    <li><button onclick="showTab('documentsSection')" class="sidebar-btn w-full flex items-center px-4 py-2 rounded"><span class="mr-2">📄</span> Document Request</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <div class="flex-1 bg-gray-100">
+            <!-- Top Bar -->
+            <header class="bg-blue-600 text-white flex justify-between items-center px-8 py-4">
+                <h1 class="text-2xl font-bold">Dashboard</h1>
+                <div class="flex items-center">
+                    <span id="topBarUserName" class="font-semibold mr-3">Admin Administrator</span>
+                    <img src="brgy.png" alt="User" class="h-10 w-10 rounded-full">
+                </div>
+            </header>
+            <!-- Dashboard Cards -->
+            <section id="dashboardMain" class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-600 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">👥</span><div class="font-bold text-lg">POPULATION</div><div class="text-2xl">2</div><div class="mt-2 text-sm">Total Population</div></div>
+                    <div class="bg-purple-500 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">👨</span><div class="font-bold text-lg">MALE</div><div class="text-2xl">1</div><div class="mt-2 text-sm">Total Male</div></div>
+                    <div class="bg-yellow-400 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">👩</span><div class="font-bold text-lg">FEMALE</div><div class="text-2xl">1</div><div class="mt-2 text-sm">Total Female</div></div>
+                    <div class="bg-green-500 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">🗳️</span><div class="font-bold text-lg">VOTERS</div><div class="text-2xl">0</div><div class="mt-2 text-sm">Total Voters</div></div>
+                    <div class="bg-blue-400 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">👥</span><div class="font-bold text-lg">NON VOTERS</div><div class="text-2xl">2</div><div class="mt-2 text-sm">Total Non Voters</div></div>
+                    <div class="bg-purple-400 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">📋</span><div class="font-bold text-lg">PRECINCT</div><div class="text-2xl">2</div><div class="mt-2 text-sm">Precint Information</div></div>
+                    <div class="bg-red-700 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">🚩</span><div class="font-bold text-lg">PUROK</div><div class="text-2xl">8</div><div class="mt-2 text-sm">Purok Information</div></div>
+                    <div class="bg-red-500 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">📑</span><div class="font-bold text-lg">BLOTTER</div><div class="text-2xl">1</div><div class="mt-2 text-sm">Blotter Information</div></div>
+                    <div class="bg-green-600 text-white rounded-lg p-6 flex flex-col items-center"><span class="text-3xl mb-2">💲</span><div class="font-bold text-lg">REVENUE</div><div class="text-2xl">₱ 350.00</div><div class="mt-2 text-sm">All Revenues</div></div>
+                </div>
+            </section>
+            <!-- Tabbed Sections -->
+            <section id="residentsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Residents</h3>
+                <button id="addResidentBtn" class="mb-4 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded transition">+ Add Resident</button>
+                <div id="addResidentForm" class="mb-4 hidden">
+                    <form id="residentForm" class="bg-white p-4 rounded shadow-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                            <input type="text" id="residentFirstName" placeholder="First Name" class="border px-2 py-1 rounded w-full" required>
+                            <input type="text" id="residentLastName" placeholder="Last Name" class="border px-2 py-1 rounded w-full" required>
+                        </div>
+                        <input type="text" id="residentUsername" placeholder="Username" class="border px-2 py-1 rounded w-full mb-2" required>
+                        <input type="email" id="residentEmail" placeholder="Email" class="border px-2 py-1 rounded w-full mb-2" required>
+                        <input type="password" id="residentPassword" placeholder="Password" class="border px-2 py-1 rounded w-full mb-2" required>
+                        <select id="residentRole" class="border px-2 py-1 rounded w-full mb-2">
+                            <option value="resident">Resident</option>
+                            <option value="kagawad">Kagawad</option>
+                            <option value="chairman">Chairman/Chairwoman</option>
+                            <option value="official">Barangay Official</option>
+                        </select>
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Add</button>
+                        <button type="button" id="cancelAddResident" class="ml-2 bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
+                        <div id="residentAddError" class="text-red-600 mt-2"></div>
+                    </form>
+                </div>
+                <div id="residentsTableBody">Residents will be loaded here.</div>
+            </section>
+            <section id="officialsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Brgy Officials</h3>
+                <div id="officialsTableBody">Officials will be loaded here.</div>
+            </section>
+            <section id="complaintsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Complaints and Suggestions</h3>
+                <div id="complaintsTableBody">Complaints will be loaded here.</div>
+            </section>
+            <section id="documentsSection" class="hidden p-8">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Document Requests</h3>
+                <div id="documentsTableBody">Documents will be loaded here.</div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+    
+</body>
+</html>

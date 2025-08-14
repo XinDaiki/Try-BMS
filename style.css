@@ -1,0 +1,106 @@
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            transform: translateY(-2px);
+        }
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgb(238, 121, 121);
+        }
+/* Full-page background */
+#loginSection {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('your-background.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Optional dark overlay for readability */
+#loginSection::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphism Card */
+#loginSection .bg-white {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+#loginSection h2 {
+    color: white;
+    font-weight: bold;
+}
+
+/* Inputs */
+#loginSection input[type="text"],
+#loginSection input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+#loginSection input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Eye icon for password */
+#loginSection button[onclick*="togglePasswordVisibility"] {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Login button */
+#loginSection button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#loginSection button[type="submit"]:hover {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+}
+
+/* Small text */
+#loginSection p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#loginSection a {
+    color: #a3d8ff;
+    text-decoration: none;
+}
+#loginSection a:hover {
+    text-decoration: underline;
+}
